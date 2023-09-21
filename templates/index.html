@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Resell Price Prediction</title>
+    <h1>Enter Details to predict the resell value</h1>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
+
+        #container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        select:hover,
+        input[type="number"]:hover {
+            background-color: #f5f5f5;
+        }
+
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Predict the Selling Price of Your Car</h1>
+        <form action="{{ url_for('predict')}}" method="post">
+            <label for="Year">Year:</label>
+            <input id="Year" name="Year" type="number" required>
+
+            <label for="Present_Price">Showroom Price (In lakhs):</label>
+            <input id="Present_Price" name="Present_Price" type="number" required>
+
+            <label for="Kms_Driven">Kilometers Driven:</label>
+            <input id="Kms_Driven" name="Kms_Driven" type="number" required>
+
+            <label for="Owner">Number of Previous Owners:</label>
+            <input id="Owner" name="Owner" type="number" required>
+
+            <label for="Fuel_Type_Petrol">Fuel Type:</label>
+            <select name="Fuel_Type_Petrol" id="Fuel_Type_Petrol" required>
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="CNG">CNG</option>
+            </select>
+
+            <label for="Seller_Type_Individual">Are you a Dealer or Individual:</label>
+            <select name="Seller_Type_Individual" id="Seller_Type_Individual" required>
+                <option value="Dealer">Dealer</option>
+                <option value="Individual">Individual</option>
+            </select>
+
+            <label for="Transmission_Mannual">Transmission Type:</label>
+            <select name="Transmission_Mannual" id="Transmission_Mannual" required>
+                <option value="Manual">Manual Car</option>
+                <option value="Automatic">Automatic Car</option>
+            </select>
+
+            <button type="submit">Calculate the Selling Price</button>
+        </form>
+
+        <div id="result">{{ prediction_text }}</div>
+    </div>
+</body>
+
+</html>
